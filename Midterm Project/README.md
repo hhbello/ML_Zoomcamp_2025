@@ -35,5 +35,5 @@ Finally, run the command `pipenv install requests pandas scikit-learn jupyter`, 
 
 ## **4. Containerization (Docker)**
 
-We defined the environment and dependencies inside a Dockerfile. Next, we build the docker image `docker build -t Dockerfile .` from the project root.
-To run the container, start the container and map port `docker run -p 9696:9696 Dockerfile` . This makes the Flask API accessible at `http://127.0.0.1:9696/predict` .
+We defined the environment and dependencies inside a Dockerfile. Next, we build the docker image `docker build -t dockerfile .` from the project root.
+To run the container, start the container and map port `docker run -p 9696:9696 dockerfile` . This makes the Flask API accessible at `http://127.0.0.1:9696/predict` .
