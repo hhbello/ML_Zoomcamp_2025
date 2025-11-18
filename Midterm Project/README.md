@@ -2,7 +2,7 @@
 
 The compressive strength of concrete is a very important property in civil engineering and prediciting this is very critical to the service life of the concrete structure. Compressive strength measures how much load a concrete mixture can withstand before failing (typically tested after 28 days of curing), and it directly influences the structural integrity, durability, and safety of buildings, bridges, and infrastructure. Accurately forecasting this property is essential for optimizing material formulations, reducing costs, minimizing waste, and ensuring compliance with building standards.Traditional methods rely on empirical formulas, lab experiments, or trial-and-error mixing, which are time-consuming, expensive, and limited in scalability. The dataset, sourced from a 1998 study by Yeh on high-performance concrete, provides experimental data from laboratory tests on various mixtures to enable data-driven predictions with ML models. It includes 1,030 samples with 8 input features representing mixture components and additives, and the concrete's compressive strength (in MPa, ranging from ~2 to ~82 MPa) as the target variable.
 
-Key attributes within the dataset include:
+Features within the dataset include:
 
 Cement: The quantity of cement used in the concrete mixture, which serves as the binding agent.
 
@@ -27,3 +27,13 @@ Concrete Strength (MPa): The compressive strength of the concrete specimen, meas
 Using ML, this problem can be transformed into a supervised regression problem. train models on the features to predict the compressive strength for new mixtures. This enables virtual experimentation, faster design iterations, and proactive quality control without physical tests. ML models can simulate thousands of trial mixes instantly, reducing lab trials by 50-80% in practice.
 Also, techniques like hyperparameter tuning or genetic algorithms can find ideal mixtures for specific strength targets (e.g., eco-friendly low-cement formulas).
 
+## **3. Installing dependencies**
+
+To install the required dependencies, using command prompt or powershell, change the directory to the folder where you want the virtual environment to be and run the command "pipenv --python 3.10". This will create a virtual environment and install python 3.10.
+Next, run the command `pipenv shell`, this will activate the environment. 
+Finally, run the command `pipenv install requests pandas scikit-learn jupyter`, this will install these depencies, to install more, run `pipenv install dependency_name`. a list of the dependencies used are contained in the Pipfile.
+
+## **4. Containerization (Docker)**
+
+We defined the environment and dependencies inside a Dockerfile. Next, we build the docker image `docker build -t midterm` from the project root.
+To run the container, start the container and map port `docker run -p 9696:9696 midterm`. This makes the Flask API accessible at `http://127.0.0.1:9696/predict`.
