@@ -2,7 +2,7 @@ import requests
 
 url = 'http://localhost:9696/predict'
 
-
+# trial mix to predict
 strength =  {
     "cement": 462.0,
     "blast_furnace_slag": 113.5,
@@ -16,5 +16,6 @@ strength =  {
 
 
 requests.post(url, json=strength).json()
+
 
 
