@@ -11,7 +11,6 @@ from sklearn.linear_model import LinearRegression
 from sklearn.ensemble import RandomForestRegressor
 
 import xgboost as xgb
-import tensorflow as tf
 
 
 # Data loading and parsing
@@ -77,5 +76,6 @@ print(f"XGBoost (Tuned) - RMSE: {rmse_xgb_tuned:.4f}kW, R2: {r2_xgb_tuned:.4f}")
 # Save the model
 with open('xgb_tuned.pkl', 'wb') as f:
     pickle.dump(best_xgb, f)
+
 
 print(f"Model saved as 'xgb_tuned.pkl'")
