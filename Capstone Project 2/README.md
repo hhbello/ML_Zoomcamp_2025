@@ -61,7 +61,6 @@ The tuned XGB Model had a slightly better performance than the random forest mod
 - **Machine Learning**: `scikit-learn`, `xgboost`
 - **Deployment**: `Flask`, `Gunicorn`, `Docker`
 
----
 
 ## How to Run
 
