@@ -79,7 +79,7 @@ The tuned XGB Model had a slightly better performance than the random forest mod
    ```bash
    pipenv run python app.py
    ```
-**Please Note:** The keras/tensorflow dependencies are very large, and are only used in the notebook to evaluate the model performance, as such it can be excluded from the pipfile, and all cells that do not require the tensorflow will run.
+***Note:** The keras/tensorflow dependencies are very large, and are only used in the notebook to evaluate the model performance, as such it can be excluded from the pipfile, and all cells that do not require the tensorflow will run.*
 
 ### Docker Deployment
 1. Build the image:
