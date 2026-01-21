@@ -105,6 +105,8 @@ Comparing all the models analyzed, the tuned XGB Model had a slightly better per
    ```
    ***Note:** The keras/tensorflow dependencies are very large, and are only used in the notebook to evaluate the variations of the DNN model, as such it can be excluded from the pipfile, and all cells that do not require tensorflow will run.*
 
+5. The app connects via the `index.html` file. There, you can input arbitrary values to get a corresponding predicted output. Be sure to download the folder to get predictions from the app. A screenshot of the web app is included in the folder for your reference.
+
 ### Docker Deployment
 1. Build the image:
    ```bash
@@ -123,6 +125,7 @@ Comparing all the models analyzed, the tuned XGB Model had a slightly better per
 - `app.py`: Flask application providing the prediction API.
 - `predict_test.py`: Client script for verifying the API.
 - `data/`: Contains the raw generation and weather sensor CSVs.
+- `templates/`: Contains the html page to input data and generate predictions for the application.
 - `Dockerfile`: Containerization configuration.
 - `Pipfile`/`Pipfile.lock`: Dependency management.
 - `Capstone 2 notebook.ipynb`: Is the notebook used for EDA and model evaluation.
