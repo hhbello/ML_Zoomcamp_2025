@@ -24,7 +24,7 @@ def predict():
             prediction = model.predict(final_features)
             output = prediction[0] # output is scalar from xgb predict
             
-            return jsonify({'prediction': f"{output:.4f} kW"})
+            return jsonify({'prediction': f"{output:.2f} kW"})
         else:
             # Get data from form (legacy)
             features = [float(x) for x in request.form.values()]
@@ -33,7 +33,7 @@ def predict():
             prediction = model.predict(final_features)
             output = prediction[0] 
             
-            return render_template('index.html', prediction_text=f'Predicted AC Power: {output:.4f} kW')
+            return render_template('index.html', prediction_text=f'Predicted AC Power: {output:.2f} kW')
 
     except Exception as e:
         if request.is_json:
@@ -42,3 +42,4 @@ def predict():
 
 if __name__ == "__main__":
     app.run(debug=True, host='0.0.0.0', port=9696)
+
