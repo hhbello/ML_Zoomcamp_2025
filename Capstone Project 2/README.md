@@ -103,7 +103,7 @@ Comparing all the models analyzed, the tuned XGB Model had a slightly better per
    ```bash
    pipenv run python app.py
    ```
-   ***Note:** The keras/tensorflow dependencies are very large, and are only used in the notebook to evaluate the model performance, as such it can be excluded from the pipfile, and all cells that do not require       the tensorflow will run.*
+   ***Note:** The keras/tensorflow dependencies are very large, and are only used in the notebook to evaluate the variations of the DNN model, as such it can be excluded from the pipfile, and all cells that do not require tensorflow will run.*
 
 ### Docker Deployment
 1. Build the image:
