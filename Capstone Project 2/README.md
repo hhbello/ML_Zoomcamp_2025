@@ -1,4 +1,4 @@
-<img width="1389" height="489" alt="image" src="https://github.com/user-attachments/assets/e415f2af-06d4-4a58-be26-9c8d43c59364" /># Solar Power Generation Prediction
+# Solar Power Generation Prediction
 
 ## Problem Description
 Solar energy is a cornerstone of renewable energy transitions world-wide. However, solar power generation is inherently variable, depending heavily on weather conditions such as temperature, irradiation, and cloud cover. This inconsistency poses significant challenges for power grid operators who must balance electricity supply and demand in real-time.
