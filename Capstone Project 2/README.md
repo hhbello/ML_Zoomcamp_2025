@@ -1,4 +1,4 @@
-# Solar Power Generation Prediction
+<img width="1389" height="489" alt="image" src="https://github.com/user-attachments/assets/e415f2af-06d4-4a58-be26-9c8d43c59364" /># Solar Power Generation Prediction
 
 ## Problem Description
 Solar energy is a cornerstone of renewable energy transitions world-wide. However, solar power generation is inherently variable, depending heavily on weather conditions such as temperature, irradiation, and cloud cover. This inconsistency poses significant challenges for power grid operators who must balance electricity supply and demand in real-time.
@@ -47,9 +47,17 @@ All the models had their parameters tweaked slightly from their base form beside
 
 The Random Forest Model had the same performance with the base model and tuned model, showing no signs of improvement from it's base score which was already a very good.
 
-The base DNN model had the best performance of the neural networks but was still not as good as the tree models. The Deep model with dropouts was the most unstable when tracking the training and validation loss.
+The base DNN model had the best performance of the neural networks with R<sup>2</sup> 0.985 and RMSE 54.88kW but did not perform as well as the tree-based models.
+<img width="1389" height="489" alt="image" src="https://github.com/user-attachments/assets/97a9fcbe-e65c-4f7a-b458-ac6284f54311" />
 
-The tuned XGB Model had a slightly better performance than the random forest model and was selected as the best model with and R^2 score of 0.9865.
+The DNN with dropouts was the most unstable when tracking the training and validation loss with R<sup>2</sup> 0.9729 and RMSE 64.64kW.
+<img width="1389" height="489" alt="image" src="https://github.com/user-attachments/assets/f5e153ee-0b4a-4031-a689-a75c201bfdba" />
+
+The DNN without dropouts had the best perfomance of the three variations with R<sup>2</sup> 0.9834 and RMSE 50.69kW. Without the dropouts, the model might tend to over fit to the training data.
+<img width="1389" height="489" alt="image" src="https://github.com/user-attachments/assets/e30e9693-00e8-44e6-9f43-51397cc6e27d" />
+
+
+Comparing all the models analyzed, the tuned XGB Model had a slightly better performance than the random forest model and was selected as the best model with and R<sup>2</sup> score of 0.9865.
 
 <img width="1389" height="590" alt="image" src="https://github.com/user-attachments/assets/21135f59-b51b-413c-b23e-58039431a26b" />
 
@@ -78,7 +86,7 @@ The tuned XGB Model had a slightly better performance than the random forest mod
    ```bash
    pipenv run python app.py
    ```
-***Note:** The keras/tensorflow dependencies are very large, and are only used in the notebook to evaluate the model performance, as such it can be excluded from the pipfile, and all cells that do not require the tensorflow will run.*
+   ***Note:** The keras/tensorflow dependencies are very large, and are only used in the notebook to evaluate the model performance, as such it can be excluded from the pipfile, and all cells that do not require       the tensorflow will run.*
 
 ### Docker Deployment
 1. Build the image:
