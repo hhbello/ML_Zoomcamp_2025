@@ -125,3 +125,4 @@ Comparing all the models analyzed, the tuned XGB Model had a slightly better per
 - `data/`: Contains the raw generation and weather sensor CSVs.
 - `Dockerfile`: Containerization configuration.
 - `Pipfile`/`Pipfile.lock`: Dependency management.
+- `Capstone 2 notebook.ipynb`: Is the notebook used for EDA and model evaluation.
