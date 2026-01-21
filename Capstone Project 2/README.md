@@ -29,12 +29,19 @@ The analysis and modeling are based on two primary datasets collected over a 34-
   - `IRRADIATION`: Amount of solar radiation hitting the panels.
  
 ## Insights from EDA
+
 **AC Power Distribution by Hour:**
+
 **Peak Usage (Hours 10-14):** The highest AC power consumption occurs during midday and early afternoon, with median values reaching approximately 1,000-1,150 units. This aligns with the hottest part of the day when cooling demand is greatest.
+
 **Low Usage (Hours 0-6 and 18-23):** During nighttime and early morning hours, AC usage drops dramatically, with median values near zero or very low levels. This makes sense as temperatures are cooler and many buildings may be unoccupied or require less cooling.
+
 **Transition Periods:** Hours 7-9 show a gradual ramp-up as temperatures rise and occupancy increases (morning), while hours 15-17 show declining usage as the day cools down (late afternoon/evening).
+
 **Outliers:** The numerous outlier points (circles) above the boxes, particularly during peak hours, suggest instances of unusually high consumption—possibly due to extremely hot days, special events, or buildings with different usage patterns.
+
 **Variability:** The wide whiskers and large interquartile ranges during peak hours indicate substantial day-to-day variation in cooling needs, likely driven by weather conditions, while nighttime hours show much more consistent (and minimal) usage.
+
 This pattern is typical for residential or commercial buildings in warm climates, where AC demand closely tracks outdoor temperature and occupancy schedules.
 <img width="1018" height="552" alt="image" src="https://github.com/user-attachments/assets/f426632c-1f22-4c20-9d1a-cdfeb60ead4f" />
 
