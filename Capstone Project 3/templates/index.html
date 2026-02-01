@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Steel Faults Predictor</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #4F46E5;
+            --primary-hover: #4338CA;
+            --bg: #F9FAFB;
+            --card-bg: #FFFFFF;
+            --text: #111827;
+            --text-muted: #6B7280;
+            --border: #E5E7EB;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            margin: 0;
+            padding: 2rem;
+            display: flex;
+            justify-content: center;
+        }
+
+        .container {
+            max-width: 1000px;
+            width: 100%;
+        }
+
+        .card {
+            background: var(--card-bg);
+            padding: 2.5rem;
+            border-radius: 1rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            text-align: center;
+        }
+
+        p.subtitle {
+            text-align: center;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .field {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            font-size: 0.875rem;
+            font-weight: 500;
+            margin-bottom: 0.25rem;
+            color: var(--text-muted);
+        }
+
+        input {
+            padding: 0.625rem;
+            border: 1px solid var(--border);
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+        }
+
+        .actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        button {
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: none;
+        }
+
+        button.primary {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        button.primary:hover {
+            background-color: var(--primary-hover);
+        }
+
+        button.secondary {
+            background-color: white;
+            border: 1px solid var(--border);
+            color: var(--text);
+        }
+
+        button.secondary:hover {
+            background-color: var(--bg);
+        }
+
+        .result-card {
+            margin-top: 2rem;
+            padding: 2rem;
+            border-radius: 0.75rem;
+            background: #EEF2FF;
+            display: none;
+            border: 1px solid #C7D2FE;
+        }
+
+        .result-card h2 {
+            margin-top: 0;
+            font-size: 1.25rem;
+            color: var(--primary);
+        }
+
+        .prediction-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text);
+        }
+
+        .loader {
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid var(--primary);
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            animation: spin 1s linear infinite;
+            display: none;
+            margin: 0 auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <h1>Steel Faults Detector</h1>
+            <p class="subtitle">Enter plate characteristics to predict the type of fault</p>
+            
+            <form id="predictionForm">
+                <div class="grid" id="fieldsContainer">
+                    <!-- Fields will be generated here -->
+                </div>
+
+                <div class="actions">
+                    <button type="button" class="secondary" onclick="loadSample()">Load Sample</button>
+                    <button type="submit" class="primary" id="submitBtn">Predict Fault Type</button>
+                </div>
+                <div class="loader" id="loader"></div>
+            </form>
+
+            <div class="result-card" id="resultCard">
+                <h2>Prediction Result</h2>
+                <div class="prediction-value" id="predictionValue">---</div>
+                <div style="margin-top: 1rem;">
+                    <label>Probabilities:</label>
+                    <div id="probList" style="font-size: 0.875rem; color: var(--text-muted);"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const features = [
+            'X_Minimum', 'X_Maximum', 'Y_Minimum', 'Y_Maximum', 'Pixels_Areas',
+            'X_Perimeter', 'Y_Perimeter', 'Sum_of_Luminosity', 'Minimum_of_Luminosity',
+            'Maximum_of_Luminosity', 'Length_of_Conveyer', 'TypeOfSteel_A300',
+            'TypeOfSteel_A400', 'Steel_Plate_Thickness', 'Edges_Index', 'Empty_Index',
+            'Square_Index', 'Outside_X_Index', 'Edges_X_Index', 'Edges_Y_Index',
+            'Outside_Global_Index', 'Log_X_Index', 'Log_Y_Index', 'LogOfAreas',
+            'Orientation_Index', 'Luminosity_Index', 'SigmoidOfAreas'
+        ];
+
+        const sample = {
+            'X_Minimum': 42.0, 'X_Maximum': 50.0, 'Y_Minimum': 270900.0, 'Y_Maximum': 270944.0,
+            'Pixels_Areas': 267.0, 'X_Perimeter': 17.0, 'Y_Perimeter': 44.0,
+            'Sum_of_Luminosity': 24220.0, 'Minimum_of_Luminosity': 76.0,
+            'Maximum_of_Luminosity': 108.0, 'Length_of_Conveyer': 1687.0,
+            'TypeOfSteel_A300': 1.0, 'TypeOfSteel_A400': 0.0, 'Steel_Plate_Thickness': 80.0,
+            'Edges_Index': 0.1739, 'Empty_Index': 0.25, 'Square_Index': 0.1818,
+            'Outside_X_Index': 0.0047, 'Edges_X_Index': 0.4706, 'Edges_Y_Index': 1.0,
+            'Outside_Global_Index': 1.0, 'Log_X_Index': 0.9031, 'Log_Y_Index': 1.6435,
+            'LogOfAreas': 2.4265, 'Orientation_Index': 0.8182, 'Luminosity_Index': -0.2913,
+            'SigmoidOfAreas': 0.5822
+        };
+
+        const container = document.getElementById('fieldsContainer');
+        features.forEach(f => {
+            const div = document.createElement('div');
+            div.className = 'field';
+            div.innerHTML = `
+                <label for="${f}">${f.replace(/_/g, ' ')}</label>
+                <input type="number" step="any" id="${f}" name="${f}" value="0">
+            `;
+            container.appendChild(div);
+        });
+
+        function loadSample() {
+            for (const [key, value] of Object.entries(sample)) {
+                const el = document.getElementById(key);
+                if (el) el.value = value;
+            }
+        }
+
+        document.getElementById('predictionForm').onsubmit = async (e) => {
+            e.preventDefault();
+            const btn = document.getElementById('submitBtn');
+            const loader = document.getElementById('loader');
+            const resultCard = document.getElementById('resultCard');
+            
+            btn.style.display = 'none';
+            loader.style.display = 'block';
+            resultCard.style.display = 'none';
+
+            const formData = new FormData(e.target);
+            const data = {};
+            formData.forEach((value, key) => data[key] = parseFloat(value));
+
+            try {
+                const response = await fetch('/predict', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+                const result = await response.json();
+                
+                if (result.error) {
+                    alert('Error: ' + result.error);
+                } else {
+                    document.getElementById('predictionValue').innerText = result.prediction;
+                    const probList = document.getElementById('probList');
+                    probList.innerHTML = '';
+                    Object.entries(result.probabilities).sort((a,b) => b[1] - a[1]).forEach(([name, prob]) => {
+                        probList.innerHTML += `<div>${name}: ${(prob * 100).toFixed(2)}%</div>`;
+                    });
+                    resultCard.style.display = 'block';
+                }
+            } catch (err) {
+                alert('Connection error: ' + err);
+            } finally {
+                btn.style.display = 'block';
+                loader.style.display = 'none';
+            }
+        };
+    </script>
+</body>
+</html>
