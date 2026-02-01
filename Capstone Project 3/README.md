@@ -1,4 +1,4 @@
-# Steel Faults Classification
+# Steel Plate Faults Detection
 
 ## Problem Description
 Steel is one of the most critical materials in modern infrastructure, manufacturing, and construction. Ensuring the quality of steel plates is essential, as defects can compromise structural integrity, safety, and economic efficiency. During production, steel plates may develop faults such as cracks, scratches, or inclusions, which are often difficult to detect and classify accurately using traditional inspection methods. Manual inspection is time-consuming, prone to human error, and costly for large-scale operations.
@@ -11,7 +11,8 @@ The goal of this project is to build a machine learning model that can automatic
 - Enhance safety and reliability in downstream applications such as construction and automotive manufacturing.
 
 ## Dataset Description
-The analysis and modeling are based on industrial inspection data collected from steel plate manufacturing processes. The dataset captures multiple sensor readings and process parameters that are used to identify and classify different types of faults in steel plates.
+The analysis and modeling are based on industrial inspection data collected from steel plate manufacturing processes. The dataset captures multiple sensor readings and process parameters that are used to identify and classify different types of faults in steel plates. The dataset is fully commited to the repo, but you can download the original data from [Steel Plates Faults Dataset on Kaggle.](https://www.kaggle.com/datasets/noepinefrin/steel-plates-faults-dataset)
+
 
 ### Steel Plate Faults Data
   **Shape:** 1,941 records
