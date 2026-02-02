@@ -112,8 +112,9 @@ Open your browser and navigate to `http://localhost:9696`.
 
 The project explores multiple tree-based algorithms. **XGBoost** achieved the best performance after tuning:
 - **Baseline Accuracy**: ~79.4%
-- **Final Accuracy**: ~79.6% (Tuned)
-  <img width="1160" height="707" alt="image" src="https://github.com/user-attachments/assets/26875b98-9f11-4d92-a222-dad86073477f" />
+- **Final Accuracy**: ~80.4% (Tuned)
+  <img width="1160" height="707" alt="image" src="https://github.com/user-attachments/assets/7192e91c-e0d5-4702-a68d-c6f0a20247d2" />
+
 
 
 ## 🐳 Docker Deployment
