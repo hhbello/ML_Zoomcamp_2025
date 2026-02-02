@@ -129,12 +129,5 @@ docker build -t steel-faults .
 docker run -p 9696:9696 steel-faults
 ```
 
-## ☁️ Cloud Deployment
-
-The application is ready for deployment on platforms like **Render**, **Heroku**, or **AWS/Google Cloud (Kubernetes)**.
-- **Port**: 9696
-- **Runtime**: Docker
-- **Entrypoint**: `gunicorn --bind 0.0.0.0:9696 app:app`
-
 ---
 *Created as part of the ML Zoomcamp 2025 Capstone Project 3.*
