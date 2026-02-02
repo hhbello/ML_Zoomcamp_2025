@@ -25,9 +25,9 @@ X_train, X_val, y_train, y_val = train_test_split(X, y, test_size=0.2, random_st
 
 # 4. Train best model (XGBoost with tuned parameters)
 params = {
-    'learning_rate': 0.2,
+    'learning_rate': 0.05,
     'max_depth': 5,
-    'n_estimators': 100,
+    'n_estimators': 200,
     'random_state': 42,
     'use_label_encoder': False,
     'eval_metric': 'mlogloss'
@@ -46,3 +46,4 @@ with open(model_file, 'wb') as f:
     pickle.dump((model, feature_names, target_cols), f)
 
 print(f"Model and metadata saved to {model_file}")
+
